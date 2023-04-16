@@ -99,3 +99,9 @@ docker-compose up
 ```
 
 Now we can visit [`localhost:4000`](http://localhost:4000) from our browser.
+
+
+Running the iex
+```
+docker-compose run --rm phoenix iex -S mix
+```
