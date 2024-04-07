@@ -40,21 +40,17 @@ defmodule WebsiteWeb.CustomComponents do
   def contact_links(assigns) do
     ~H"""
     <div class={@class}>
-      <.link href="https://github.com/flo0807" target="_blank">
+      <.link href="https://github.com/dhonysilva" target="_blank">
         <span class="sr-only">GitHub Icon</span>
         <.github_icon class={@icon_class} />
       </.link>
-      <.link href="https://linkedin.com/in/florian-arens" target="_blank">
+      <.link href="https://linkedin.com/in/dhonysilva" target="_blank">
         <span class="sr-only">LinkedIn Icon</span>
         <.linkedin_icon class={@icon_class} />
       </.link>
-      <.link href="https://x.com/flo_arens" target="_blank">
+      <.link href="https://x.com/dhonysilva" target="_blank">
         <span class="sr-only">X Icon</span>
         <.x_icon class={@icon_class} />
-      </.link>
-      <.link href="mailto:info@farens.me">
-        <span class="sr-only">Mail Icon</span>
-        <.mail_icon class={@icon_class} />
       </.link>
     </div>
     """
