@@ -17,7 +17,13 @@ defmodule WebsiteWeb.Router do
   scope "/", WebsiteWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    # get "/", PageController, :home
+
+    live_session :default, on_mount: WebsiteWeb.InitAssigns do
+      WebsiteWeb.InitAssings
+      live "/", HomeLive.Index, :index
+      live "/about", AboutLive.Index, :index
+    end
   end
 
   # Other scopes may use custom stacks.

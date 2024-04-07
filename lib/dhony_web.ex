@@ -85,6 +85,7 @@ defmodule WebsiteWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import WebsiteWeb.CoreComponents
+      import WebsiteWeb.CustomComponents
       import WebsiteWeb.Gettext
 
       # Shortcut for generating JS commands
