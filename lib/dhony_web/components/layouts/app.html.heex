@@ -1,12 +1,12 @@
 <%!-- <.mobile_navigation /> --%>
 <div class="flex h-full flex-col">
   <header>
-    <%!-- <.navbar current_url={@current_url} /> --%>
+    <.navbar current_url={@current_url} />
   </header>
   <main class="mx-auto my-8 w-full max-w-6xl px-4 md:my-12">
     <%= @inner_content %>
   </main>
   <div class="mt-auto">
-    <%!-- <.footer current_url={@current_url} class="" /> --%>
+    <.footer current_url={@current_url} class="" />
   </div>
 </div>

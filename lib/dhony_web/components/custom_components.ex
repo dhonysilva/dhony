@@ -2,6 +2,8 @@ defmodule WebsiteWeb.CustomComponents do
   use Phoenix.Component
   import Phoenix.Component
 
+  use WebsiteWeb, :verified_routes
+
   @doc """
   Renders a title.
   """
@@ -56,8 +58,50 @@ defmodule WebsiteWeb.CustomComponents do
     """
   end
 
+  @doc """
+  Renders the navbar.
+  """
+  attr :current_url, :string, required: true
 
+  def navbar(assigns) do
+    ~H"""
+    <nav class="flex h-20">
+      <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-4">
+        <.avatar />
 
+        <div class="rounded-btn bg-base-300 hidden space-x-2 px-4 py-2 sm:block">
+          <.link
+            :for={%{label: label, to: to} <- main_navigation_links()}
+            navigate={to}
+            class={["btn btn-sm", if(active?(@current_url, to), do: "btn-primary", else: "btn-ghost")]}
+          >
+            <%= label %>
+          </.link>
+        </div>
+
+        <div class="rounded-btn bg-base-300 block p-2 sm:hidden">
+          <button
+            class="btn-sm flex items-center font-semibold"
+            onclick="mobile_navigation.showModal()"
+          >
+            <span>Menu</span>
+          </button>
+        </div>
+
+      </div>
+    </nav>
+    """
+  end
+
+  def avatar(assigns) do
+    ~H"""
+    <.link navigate={~p"/"} class="avatar cursor-pointer">
+      <div class="h-10 w-auto rounded-full">
+        <img loading="lazy" src={~p"/images/dhony_perfil.jpg"} alt="Portrait of Dhony Silva" />
+      </div>
+    </.link>
+    """
+  end
 
 
   @doc """
@@ -126,71 +170,71 @@ defmodule WebsiteWeb.CustomComponents do
   @doc """
   Renders a footer.
   """
-  # attr :class, :string, default: nil
-  # attr :current_url, :string, required: true
+  attr :class, :string, default: nil
+  attr :current_url, :string, required: true
 
-  # def footer(assigns) do
-  #   ~H"""
-  #   <footer class="mx-auto w-full max-w-6xl px-4">
-  #     <div class="bg-base-content h-px w-full opacity-20" />
-  #     <div class="my-8 md:my-12">
-  #       <div class="flex w-full flex-col flex-wrap justify-between gap-x-6 gap-y-6 md:flex-row">
-  #         <nav class="">
-  #           <p class="footer-title">Pages</p>
-  #           <.link
-  #             :for={%{label: label, to: to} <- main_navigation_links()}
-  #             navigate={to}
-  #             class={[
-  #               "font-semibold mr-4",
-  #               if(active?(@current_url, to), do: "text-primary", else: "text-content")
-  #             ]}
-  #           >
-  #             <%= label %>
-  #           </.link>
-  #         </nav>
-  #         <div>
-  #           <p class="footer-title">Connect</p>
-  #           <.contact_links class="flex space-x-4" icon_class="w-6 h-6 text-content fill-current" />
-  #         </div>
-  #         <nav class="md:flex md:w-full md:justify-center">
-  #           <p class="footer-title md:hidden">Legal</p>
-  #           <.link
-  #             :for={%{label: label, to: to} <- secondary_navigation_links()}
-  #             navigate={to}
-  #             class={[
-  #               "font-semibold md:text-sm mr-4 md:opacity-60",
-  #               if(active?(@current_url, to), do: "text-primary !opacity-100", else: "text-content")
-  #             ]}
-  #           >
-  #             <%= label %>
-  #           </.link>
-  #         </nav>
-  #       </div>
-  #     </div>
-  #   </footer>
-  #   """
-  # end
+  def footer(assigns) do
+    ~H"""
+    <footer class="mx-auto w-full max-w-6xl px-4">
+      <div class="bg-base-content h-px w-full opacity-20" />
+      <div class="my-8 md:my-12">
+        <div class="flex w-full flex-col flex-wrap justify-between gap-x-6 gap-y-6 md:flex-row">
+          <nav class="">
+            <p class="footer-title">Pages</p>
+            <.link
+              :for={%{label: label, to: to} <- main_navigation_links()}
+              navigate={to}
+              class={[
+                "font-semibold mr-4",
+                if(active?(@current_url, to), do: "text-primary", else: "text-content")
+              ]}
+            >
+              <%= label %>
+            </.link>
+          </nav>
+          <div>
+            <p class="footer-title">Connect</p>
+            <.contact_links class="flex space-x-4" icon_class="w-6 h-6 text-content fill-current" />
+          </div>
+          <nav class="md:flex md:w-full md:justify-center">
+            <p class="footer-title md:hidden">Legal</p>
+            <.link
+              :for={%{label: label, to: to} <- secondary_navigation_links()}
+              navigate={to}
+              class={[
+                "font-semibold md:text-sm mr-4 md:opacity-60",
+                if(active?(@current_url, to), do: "text-primary !opacity-100", else: "text-content")
+              ]}
+            >
+              <%= label %>
+            </.link>
+          </nav>
+        </div>
+      </div>
+    </footer>
+    """
+  end
 
-  # defp main_navigation_links do
-  #   [
-  #     %{label: "Home", to: ~p"/"},
-  #     %{label: "About", to: ~p"/about"},
-  #     %{label: "Blog", to: ~p"/blog"},
-  #     %{label: "Projects", to: ~p"/projects"}
-  #   ]
-  # end
+  defp main_navigation_links do
+    [
+      %{label: "Home", to: ~p"/"},
+      %{label: "About", to: ~p"/about"},
+      %{label: "Blog", to: ~p"/blog"}
+      # %{label: "Projects", to: ~p"/projects"}
+    ]
+  end
 
-  # defp secondary_navigation_links do
-  #   [
-  #     %{label: "Legal Notice", to: ~p"/legal-notice"},
-  #     %{label: "Privacy Policy", to: ~p"/privacy-policy"}
-  #   ]
-  # end
+  defp secondary_navigation_links do
+    [
+      %{label: "Legal Notice", to: ~p"/legal-notice"},
+      %{label: "Privacy Policy", to: ~p"/privacy-policy"}
+    ]
+  end
 
-  # defp active?(current_url, to) do
-  #   %{path: path} = URI.parse(current_url)
+  defp active?(current_url, to) do
+    %{path: path} = URI.parse(current_url)
 
-  #   if to == "/", do: path == to, else: String.starts_with?(path, to)
-  # end
+    if to == "/", do: path == to, else: String.starts_with?(path, to)
+  end
 
 end
