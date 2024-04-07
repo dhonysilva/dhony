@@ -11,14 +11,59 @@ module.exports = {
     "../lib/dhony_web.ex",
     "../lib/dhony_web/**/*.*ex"
   ],
+  // theme: {
+  //   extend: {
+  //     colors: {
+  //       brand: "#FD4F00",
+  //     }
+  //   },
+  // },
+
+  daisyui: {
+    themes: [
+      {
+        night: {
+          ...require("daisyui/src/theming/themes")["night"],
+          "base-content": "#e4e4e7",
+        }
+      },
+    ],
+  },
   theme: {
     extend: {
-      colors: {
-        brand: "#FD4F00",
-      }
+      fontFamily: {
+        sans: [
+          "GeistSans",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Inter",
+          "Segoe UI",
+          "Roboto",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji",
+        ],
+        mono: [
+          "GeistMono",
+          "ui-monospace",
+          "SFMono-Regular",
+          "Roboto Mono",
+          "Menlo",
+          "Monaco",
+          "Liberation Mono",
+          "DejaVu Sans Mono",
+          "Courier New",
+          "monospace",
+        ]
+      },
     },
   },
   plugins: [
+    require('daisyui'),
     require("@tailwindcss/forms"),
     // Allows prefixing tailwind classes with LiveView classes to add rules
     // only when LiveView classes are applied, for example:

@@ -122,4 +122,75 @@ defmodule WebsiteWeb.CustomComponents do
     </svg>
     """
   end
+
+  @doc """
+  Renders a footer.
+  """
+  # attr :class, :string, default: nil
+  # attr :current_url, :string, required: true
+
+  # def footer(assigns) do
+  #   ~H"""
+  #   <footer class="mx-auto w-full max-w-6xl px-4">
+  #     <div class="bg-base-content h-px w-full opacity-20" />
+  #     <div class="my-8 md:my-12">
+  #       <div class="flex w-full flex-col flex-wrap justify-between gap-x-6 gap-y-6 md:flex-row">
+  #         <nav class="">
+  #           <p class="footer-title">Pages</p>
+  #           <.link
+  #             :for={%{label: label, to: to} <- main_navigation_links()}
+  #             navigate={to}
+  #             class={[
+  #               "font-semibold mr-4",
+  #               if(active?(@current_url, to), do: "text-primary", else: "text-content")
+  #             ]}
+  #           >
+  #             <%= label %>
+  #           </.link>
+  #         </nav>
+  #         <div>
+  #           <p class="footer-title">Connect</p>
+  #           <.contact_links class="flex space-x-4" icon_class="w-6 h-6 text-content fill-current" />
+  #         </div>
+  #         <nav class="md:flex md:w-full md:justify-center">
+  #           <p class="footer-title md:hidden">Legal</p>
+  #           <.link
+  #             :for={%{label: label, to: to} <- secondary_navigation_links()}
+  #             navigate={to}
+  #             class={[
+  #               "font-semibold md:text-sm mr-4 md:opacity-60",
+  #               if(active?(@current_url, to), do: "text-primary !opacity-100", else: "text-content")
+  #             ]}
+  #           >
+  #             <%= label %>
+  #           </.link>
+  #         </nav>
+  #       </div>
+  #     </div>
+  #   </footer>
+  #   """
+  # end
+
+  # defp main_navigation_links do
+  #   [
+  #     %{label: "Home", to: ~p"/"},
+  #     %{label: "About", to: ~p"/about"},
+  #     %{label: "Blog", to: ~p"/blog"},
+  #     %{label: "Projects", to: ~p"/projects"}
+  #   ]
+  # end
+
+  # defp secondary_navigation_links do
+  #   [
+  #     %{label: "Legal Notice", to: ~p"/legal-notice"},
+  #     %{label: "Privacy Policy", to: ~p"/privacy-policy"}
+  #   ]
+  # end
+
+  # defp active?(current_url, to) do
+  #   %{path: path} = URI.parse(current_url)
+
+  #   if to == "/", do: path == to, else: String.starts_with?(path, to)
+  # end
+
 end
