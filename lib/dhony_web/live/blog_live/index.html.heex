@@ -1,0 +1,25 @@
+<div class="flex items-center space-x-6">
+  <h1 class="text-3xl font-semibold">
+    Coming soon.
+  </h1>
+  <.link target="_blank" href={~p"/rss.xml"}>
+    <.icon name="hero-rss" class="w-7 h-7" />
+  </.link>
+</div>
+
+<.page_intro>
+  I write about whatever comes to mind. Most of the time it is somehow related to software engineering. I also use this blog to document my progress in learning new things. I hope you find something useful here, and if you do, please let me know.
+</.page_intro>
+
+<div id="articles" class="lg:w-2/3" phx-update="stream">
+  <%!-- <.blog_preview_card
+    :for={{dom_id, article} <- @streams.articles}
+    id={dom_id}
+    class="mt-4"
+    link={~p"/blog/#{article.slug}"}
+    title={article.title}
+    date={article.date}
+    description={article.description}
+    read_minutes={article.read_minutes}
+  /> --%>
+</div>

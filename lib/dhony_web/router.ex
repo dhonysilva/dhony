@@ -23,6 +23,7 @@ defmodule WebsiteWeb.Router do
       WebsiteWeb.InitAssings
       live "/", HomeLive.Index, :index
       live "/about", AboutLive.Index, :index
+      live "/blog", BlogLive.Index, :index
     end
   end
 
