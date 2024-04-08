@@ -4,6 +4,8 @@ defmodule WebsiteWeb.CustomComponents do
 
   use WebsiteWeb, :verified_routes
 
+  import WebsiteWeb.Gettext
+
   @doc """
   Renders a title.
   """
@@ -32,6 +34,34 @@ defmodule WebsiteWeb.CustomComponents do
     """
   end
 
+  @doc """
+  Renders a modal.
+  """
+  attr :id, :string, required: true, doc: "the unique id of the modal"
+  attr :header, :string, default: nil, doc: "the modal header"
+
+  slot :inner_block, doc: "the inner block that renders the modal content"
+
+  def modal(assigns) do
+    ~H"""
+    <dialog id={@id} class="modal">
+      <div class="modal-box">
+        <form method="dialog">
+          <button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">✕</button>
+        </form>
+        <h3 if={@header} class="text-base-content text-lg font-bold">
+          <%= @header %>
+        </h3>
+        <%= render_slot(@inner_block) %>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>
+          <%= gettext("close") %>
+        </button>
+      </form>
+    </dialog>
+    """
+  end
 
   @doc """
   Renders all contact links.
@@ -164,6 +194,21 @@ defmodule WebsiteWeb.CustomComponents do
       >
       </path>
     </svg>
+    """
+  end
+
+  @doc """
+  Renders the mobile navigation modal.
+  """
+  def mobile_navigation(assigns) do
+    ~H"""
+    <.modal id="mobile_navigation" header="Navigation">
+      <nav class="mt-4 flex flex-col space-y-4">
+        <.link :for={%{label: label, to: to} <- main_navigation_links()} navigate={to}>
+          <%= label %>
+        </.link>
+      </nav>
+    </.modal>
     """
   end
 
