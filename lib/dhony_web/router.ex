@@ -24,6 +24,7 @@ defmodule WebsiteWeb.Router do
       live "/", HomeLive.Index, :index
       live "/about", AboutLive.Index, :index
       live "/blog", BlogLive.Index, :index
+      live "/blog/:slug", BlogLive.Show, :show
     end
   end
 

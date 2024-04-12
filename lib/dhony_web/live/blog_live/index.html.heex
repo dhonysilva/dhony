@@ -12,7 +12,7 @@
 </.page_intro>
 
 <div id="articles" class="lg:w-2/3" phx-update="stream">
-  <%!-- <.blog_preview_card
+  <.blog_preview_card
     :for={{dom_id, article} <- @streams.articles}
     id={dom_id}
     class="mt-4"
@@ -20,6 +20,5 @@
     title={article.title}
     date={article.date}
     description={article.description}
-    read_minutes={article.read_minutes}
-  /> --%>
+  />
 </div>

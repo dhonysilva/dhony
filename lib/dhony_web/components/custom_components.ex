@@ -260,6 +260,79 @@ defmodule WebsiteWeb.CustomComponents do
     """
   end
 
+  @doc """
+  Renders a blog preview card.
+  """
+  attr :id, :string, default: nil
+  attr :link, :any, required: true
+  attr :class, :string, default: nil
+  attr :title, :string, required: true
+  attr :description, :string, required: true
+  attr :date, :any, required: true
+  attr :read_minutes, :integer, required: true
+
+  def blog_preview_card(assigns) do
+    ~H"""
+    <.link navigate={@link} target="_blank">
+      <article class={[
+        "card bg-base-200 group h-full w-full cursor-pointer transition-all hover:-translate-y-1",
+        @class
+      ]}>
+        <div class="card-body">
+          <h2 class="card-title text-pretty mb-4">
+            <%= @title %>
+          </h2>
+          <div class="mb-4 flex w-fit items-center">
+            <span class="text-xs font-semibold">
+              <%= Calendar.strftime(@date, "%d %B %Y") %>
+            </span>
+            <span class="bg-base-content mx-2 h-px w-4 flex-1 opacity-20" />
+            <span class="text-xs font-semibold">
+            </span>
+          </div>
+          <p class="text-pretty mb-4">
+            <%= @description %>
+          </p>
+          <%!-- Article tags
+            <div class="flex flex-wrap gap-x-2 gap-y-2">
+              <span class="badge badge-secondary">Tag 1</span>
+              <span class="badge badge-secondary">Tag 2</span>
+              <span class="badge badge-secondary">Tag 3</span>
+            </div>
+          --%>
+          <div class="card-actions justify-end">
+            <div class="flex items-center space-x-2">
+              <span class="text-content group-hover:text-primary group-hover:underline">
+                Read more
+              </span>
+              <%!-- <.icon name="hero-arrow-right" class="text-content group-hover:text-primary" /> --%>
+            </div>
+          </div>
+        </div>
+      </article>
+    </.link>
+    """
+  end
+
+  @doc """
+  Renders a table of contents from a list of headings.
+  """
+  attr :headings, :list, required: true
+  attr :class, :string, default: "menu w-56 p-0 opacity-60"
+
+  def toc(assigns) do
+    ~H"""
+    <ul class={@class}>
+      <li :for={%{label: label, href: href, childs: childs} <- @headings}>
+        <.link href={href}>
+          <%= label %>
+        </.link>
+        <.toc :if={childs != []} headings={childs} class="" />
+      </li>
+    </ul>
+    """
+  end
+
   defp main_navigation_links do
     [
       %{label: "Home", to: ~p"/"},
