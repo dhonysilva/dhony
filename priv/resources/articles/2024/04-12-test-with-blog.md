@@ -10,3 +10,5 @@ I talk about why Elixir and Phoenix were chosen over a static site generator to 
 ## Introduction
 
 I've just published the redesign and refactoring of my blog, so it's time for a *Hello World* article where I talk about some exciting features of this site. 
+
+## Introduction
