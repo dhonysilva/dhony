@@ -11,11 +11,13 @@ defmodule Website.Application do
       WebsiteWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:dhony, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Website.PubSub},
+
       # Start the Finch HTTP client for sending emails
       {Finch, name: Website.Finch},
       # Start a worker by calling: Website.Worker.start_link(arg)
       # {Website.Worker, arg},
       # Start to serve requests, typically the last entry
+      WebsiteWeb.Presence,
       WebsiteWeb.Endpoint
     ]
 
