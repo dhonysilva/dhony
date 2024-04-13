@@ -89,6 +89,20 @@ defmodule WebsiteWeb.CustomComponents do
   end
 
   @doc """
+  Renders a grid.
+  """
+  attr :class, :string, default: nil
+  slot :inner_block
+
+  def grid(assigns) do
+    ~H"""
+    <section class={["grid gap-5 md:grid-cols-2 lg:grid-cols-3", @class]}>
+      <%= render_slot(@inner_block) %>
+    </section>
+    """
+  end
+
+  @doc """
   Renders the navbar.
   """
   attr :current_url, :string, required: true
@@ -288,18 +302,12 @@ defmodule WebsiteWeb.CustomComponents do
             </span>
             <span class="bg-base-content mx-2 h-px w-4 flex-1 opacity-20" />
             <span class="text-xs font-semibold">
+              <%= @read_minutes %> min read
             </span>
           </div>
           <p class="text-pretty mb-4">
             <%= @description %>
           </p>
-          <%!-- Article tags
-            <div class="flex flex-wrap gap-x-2 gap-y-2">
-              <span class="badge badge-secondary">Tag 1</span>
-              <span class="badge badge-secondary">Tag 2</span>
-              <span class="badge badge-secondary">Tag 3</span>
-            </div>
-          --%>
           <div class="card-actions justify-end">
             <div class="flex items-center space-x-2">
               <span class="text-content group-hover:text-primary group-hover:underline">
