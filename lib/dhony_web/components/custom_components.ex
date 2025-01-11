@@ -131,7 +131,6 @@ defmodule WebsiteWeb.CustomComponents do
             <span>Menu</span>
           </button>
         </div>
-
       </div>
     </nav>
     """
@@ -141,12 +140,11 @@ defmodule WebsiteWeb.CustomComponents do
     ~H"""
     <.link navigate={~p"/"} class="avatar cursor-pointer">
       <div class="h-10 w-auto rounded-full">
-        <img loading="lazy" src={~p"/images/dhony_perfil.jpg"} alt="Portrait of Dhony Silva" />
+        <img loading="lazy" src={~p"/images/dhony_profile_40.png"} alt="Portrait of Dhony Silva" />
       </div>
     </.link>
     """
   end
-
 
   @doc """
   Renders the GitHub icon.
@@ -362,5 +360,4 @@ defmodule WebsiteWeb.CustomComponents do
 
     if to == "/", do: path == to, else: String.starts_with?(path, to)
   end
-
 end
