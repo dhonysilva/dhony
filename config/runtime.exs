@@ -33,8 +33,9 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  host = System.get_env("PHX_HOST") || "https://dhony.up.railway.app"
+  host = System.get_env("PHX_HOST") || "example.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
+  check_origin = System.get_env("PHX_ALLOWED_ORIGIN") || "https://#{host}"
 
   config :dhony, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
@@ -48,8 +49,9 @@ if config_env() == :prod do
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: port
     ],
-    check_origin: [System.get_env("PHX_ALLOWED_ORIGIN")],
-    secret_key_base: secret_key_base
+    check_origin: [check_origin],
+    secret_key_base: secret_key_base,
+    server: true
 
   # ## SSL Support
   #
