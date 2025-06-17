@@ -35,7 +35,25 @@ if config_env() == :prod do
 
   host = System.get_env("PHX_HOST") || "example.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
-  check_origin = System.get_env("PHX_ALLOWED_ORIGIN") || "https://#{host}"
+
+  # Configure allowed origin for CORS requests
+  # PHX_ALLOWED_ORIGIN should be a full URL like "https://yourdomain.com"
+  check_origin =
+    case System.get_env("PHX_ALLOWED_ORIGIN") do
+      nil ->
+        "https://#{host}"
+
+      origin ->
+        # Basic validation to ensure it's a proper URL
+        case URI.parse(origin) do
+          %URI{scheme: scheme, host: parsed_host}
+          when scheme in ["http", "https"] and not is_nil(parsed_host) ->
+            origin
+
+          _ ->
+            raise "PHX_ALLOWED_ORIGIN must be a valid HTTP or HTTPS URL, got: #{origin}"
+        end
+    end
 
   config :dhony, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
