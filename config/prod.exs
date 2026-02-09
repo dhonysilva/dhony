@@ -21,4 +21,7 @@ config :logger, level: :info
 
 config :dhony, WebsiteWeb.Endpoint,
   url: [host: "www.dhony.dev", port: 443, scheme: "https"],
-  check_origin: true
+  check_origin: [
+    "//www.dhony.dev",
+    "//dhony.dev"
+  ]
