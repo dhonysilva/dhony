@@ -18,10 +18,3 @@ config :logger, level: :info
 
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.
-
-config :dhony, WebsiteWeb.Endpoint,
-  url: [host: "www.dhony.dev", port: 443, scheme: "https"],
-  check_origin: [
-    "//www.dhony.dev",
-    "//dhony.dev"
-  ]
