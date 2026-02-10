@@ -41,12 +41,16 @@ if config_env() == :prod do
   # check_origin = System.get_env("PHX_ALLOWED_ORIGIN") || "https://#{host}"
 
   check_origin =
-    [
-      System.get_env("PHX_ALLOWED_ORIGIN"),
-      System.get_env("PHX_ORIGIN_01"),
-      System.get_env("PHX_ORIGIN_02")
-    ]
-    |> Enum.filter(&(&1 != nil))
+    System.get_env("PHX_ALLOWED_ORIGINS")
+    |> case do
+      nil ->
+        ["https://#{host}"]
+
+      origins ->
+        origins
+        |> String.split(",", trim: true)
+        |> Enum.map(&String.trim/1)
+    end
 
   config :dhony, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
