@@ -41,7 +41,7 @@ if config_env() == :prod do
   # check_origin = System.get_env("PHX_ALLOWED_ORIGIN") || "https://#{host}"
 
   allowed_origins =
-    System.get_env("PHX_ALLOWED_ORIGINS")
+    System.get_env("PHX_ALLOWED_ORIGIN")
     |> case do
       nil ->
         ["https://#{host}"]
