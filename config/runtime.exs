@@ -40,7 +40,7 @@ if config_env() == :prod do
   # PHX_ALLOWED_ORIGIN should be a full URL like "https://yourdomain.com"
   # check_origin = System.get_env("PHX_ALLOWED_ORIGIN") || "https://#{host}"
 
-  check_origin =
+  allowed_origins =
     System.get_env("PHX_ALLOWED_ORIGINS")
     |> case do
       nil ->
@@ -64,7 +64,7 @@ if config_env() == :prod do
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: port
     ],
-    check_origin: check_origin,
+    check_origin: allowed_origins,
     secret_key_base: secret_key_base,
     server: true
 
