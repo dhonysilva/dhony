@@ -38,7 +38,14 @@ if config_env() == :prod do
 
   # Configure allowed origin for CORS requests
   # PHX_ALLOWED_ORIGIN should be a full URL like "https://yourdomain.com"
-  check_origin = System.get_env("PHX_ALLOWED_ORIGIN") || "https://#{host}"
+  # check_origin = System.get_env("PHX_ALLOWED_ORIGIN") || "https://#{host}"
+
+  check_origin =
+    System.get_env("PHX_ALLOWED_ORIGINS")
+    |> case do
+      nil -> ["https://#{host}"]
+      origins -> String.split(origins, ",", trim: true)
+    end
 
   config :dhony, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
